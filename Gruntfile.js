@@ -4,6 +4,15 @@ module.exports = function(grunt)
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: ['public'],
+
+        copy: {
+            images: {
+                files: [
+                    { expand: true, src: ['img/*'], dest: 'public/images/', flatten: true }
+                ]
+            }
+        },
 
         jshint: {
             beforedist: ['src/scripts/*.js'],
@@ -99,31 +108,27 @@ module.exports = function(grunt)
 
 
 
-    // Plugins
+    // Plugins baby
 
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jade');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-stylus');
-    grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    require('load-grunt-tasks')(grunt);
 
 
+
+    // Common tasks
+
+    grunt.registerTask('common', ['clean', 'copy:images']);
 
     // Default tasks
 
     grunt.registerTask('scripts', ['jshint:beforedist']);
     grunt.registerTask('stylesheets', ['stylus:compile', 'autoprefixer']);
     grunt.registerTask('templates', ['jade:compile']);
-    grunt.registerTask('default', ['scripts', 'stylesheets', 'templates', 'connect', 'watch']);
+    grunt.registerTask('default', ['common', 'scripts', 'stylesheets', 'templates', 'connect', 'watch']);
 
     // Production tasks
 
     grunt.registerTask('scripts:dist', ['scripts', 'uglify:dist', 'jshint:dist']);
     grunt.registerTask('stylesheets:dist', ['stylesheets', 'cssmin:dist']);
     grunt.registerTask('templates:dist', ['templates', 'htmlmin:dist']);
-    grunt.registerTask('dist', ['scripts:dist', 'stylesheets:dist', 'templates:dist']);
+    grunt.registerTask('dist', ['common', 'scripts:dist', 'stylesheets:dist', 'templates:dist']);
 };
