@@ -1,19 +1,18 @@
 {
   "name": "webrage",
   "version": "0.0.1",
-
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "http://github.com/dddware/webrage.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/dddware/webrage.git"
   },
-
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jade": "~0.8.0",
     "grunt-contrib-stylus": "~0.11.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-uglify": "~0.2.7",
-    "bower": "~1.2.8"
+    "bower": "~1.2.8",
+    "grunt-contrib-htmlmin": "~0.1.3",
+    "grunt-autoprefixer": "~0.4.2"
   }
 }
