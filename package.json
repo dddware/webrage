@@ -1,6 +1,13 @@
 {
   "name": "webrage",
   "version": "0.0.1",
+
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "http://github.com/dddware/webrage.git"
+  },
+
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jade": "~0.8.0",
