@@ -1,22 +1,70 @@
 @import url('http://fonts.googleapis.com/css?family=Bangers')
 
-html
-  margin 0
-  padding 0
-body
-  color #333
+red = #F03A0C
 
-h1
-  font-family 'Bangers', 'Impact', 'Helvetica', 'Trebuchet MS'
-  font-size 5em
-  margin 0 0.2em
+logofont()
+  font-family 'Bangers', 'Trebuchet MS', 'Impact', 'Helvetica', 'Arial', sans-serif
   -webkit-font-smoothing antialiased
   font-style normal
   font-weight 400
+
+*
+  box-sizing border-box
+html
+body
+  margin 0
+  padding 0
+  color #333
+
+h1
+  logofont()
+  font-size 5em
+  margin 0 0 0.2em
+  text-align center
   .rage
     font-size 1.2em
-    color #F03A0C
+    color red
     margin-left 0.05em
     display inline-block
     -webkit-transform rotate(-5deg)
     transform rotate(-5deg)
+
+.main
+  position relative
+  margin 0 auto
+  max-width: 1000px
+
+.goto
+.logo
+  display inline-block
+  vertical-align top
+  min-height 32em
+
+.logo
+  width 62.5%
+  background #f2f2f2
+  border 1px solid #e5e5e5
+.goto
+  position relative
+  cursor pointer
+  width 18.75%
+  font-family 'Impact', sans-serif
+  color red
+  &:active
+    color darken(red,10)
+  &.left:after
+  &.right:after
+    font-size 5em
+    top 50%
+    left 40%
+    line-height 0
+    position absolute
+    transition all 0.1s
+  &.left:after
+    content '<'
+  &.right:after
+    content '>'
+  &.left:hover:after
+    left: 37%
+  &.right:hover:after
+    left: 43%
