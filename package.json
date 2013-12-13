@@ -14,6 +14,9 @@
     "grunt-contrib-stylus": "~0.11.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-cssmin": "",
+    "grunt-contrib-connect": "",
+    "grunt-contrib-watch": "",
     "bower": "~1.2.8"
   }
 }
