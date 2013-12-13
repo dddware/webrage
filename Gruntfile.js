@@ -1,26 +1,35 @@
 module.exports = function(grunt)
 {
-    // Project configuration.
+    // Config
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            before: ['src/scripts/*.js'],
-            after: ['dist/scripts.min.js']
+            beforedist: ['src/scripts/*.js'],
+            dist: ['public/scripts.js']
         },
 
         uglify: {
             dist: {
                 files: {
-                    'dist/scripts.min.js': ['src/scripts/*.js']
+                    'public/scripts.js': ['public/scripts.js']
                 }
             }
         },
 
         jade: {
+            compile: {
+                files: {
+                    'public/index.html': ['src/templates/index.jade']
+                }
+            }
+        },
+
+        htmlmin: {
             dist: {
                 files: {
-                    'dist/index.html': ['src/templates/index.jade']
+                    'public/index.html': ['src/templates/index.jade']
                 }
             }
         },
@@ -30,17 +39,23 @@ module.exports = function(grunt)
                 compress: false
             },
 
-            dist: {
+            compile: {
                 files: {
-                    'dist/styles.css': ['src/stylesheets/*.styl']
+                    'public/styles.css': ['src/stylesheets/*.styl']
                 }
+            }
+        },
+
+        autoprefixer: {
+            no_dest: {
+                src: 'public/styles.css'
             }
         },
 
         cssmin: {
             dist: {
                 files: {
-                    'dist/styles.css': ['dist/styles.css']
+                    'public/styles.css': ['public/styles.css']
                 }
             }
         },
@@ -49,7 +64,7 @@ module.exports = function(grunt)
             server: {
                 options: {
                     port: 9001,
-                    base: 'dist',
+                    base: 'public',
                     open: true,
                     livereload: true
                 }
@@ -77,25 +92,38 @@ module.exports = function(grunt)
                     livereload: true
                 },
 
-                files: ['dist/**/*'],
-            },
+                files: ['public/**/*'],
+            }
         }
     });
 
-    // Load the plugins
+
+
+    // Plugins
+
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-stylus');
+    grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    // Task(s).
-    grunt.registerTask('scripts', ['jshint:before', 'uglify:dist', 'jshint:after']);
-    grunt.registerTask('stylesheets', ['stylus:dist', 'cssmin:dist']);
-    grunt.registerTask('templates', ['jade:dist']);
-    
-    grunt.registerTask('dist', ['scripts', 'stylesheets', 'templates']);
-    grunt.registerTask('default', ['connect', 'watch']);
+
+
+    // Default tasks
+
+    grunt.registerTask('scripts', ['jshint:beforedist']);
+    grunt.registerTask('stylesheets', ['stylus:compile', 'autoprefixer']);
+    grunt.registerTask('templates', ['jade:compile']);
+    grunt.registerTask('default', ['scripts', 'stylesheets', 'templates', 'connect', 'watch']);
+
+    // Production tasks
+
+    grunt.registerTask('scripts:dist', ['scripts', 'uglify:dist', 'jshint:dist']);
+    grunt.registerTask('stylesheets:dist', ['stylesheets', 'cssmin:dist']);
+    grunt.registerTask('templates:dist', ['templates', 'htmlmin:dist']);
+    grunt.registerTask('dist', ['scripts:dist', 'stylesheets:dist', 'templates:dist']);
 };
