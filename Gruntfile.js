@@ -7,34 +7,15 @@ module.exports = function(grunt)
         clean: ['public'],
 
         copy: {
-            images: {
+            default: {
                 files: [
                     { expand: true, src: ['img/*'], dest: 'public/images/', flatten: true }
                 ]
             }
         },
 
-        jshint: {
-            dist: ['src/scripts/*.js']
-        },
-
-        concat: {
-            scripts: {
-                src: ['bower_components/jquery/jquery.min.js', 'src/scripts/*.js'],
-                dest: 'public/scripts.js'
-            }
-        },
-
-        uglify: {
-            dist: {
-                files: {
-                    'public/scripts.js': ['public/scripts.js']
-                }
-            }
-        },
-
         jade: {
-            compile: {
+            default: {
                 files: {
                     'public/index.html': ['src/templates/index.jade']
                 }
@@ -42,7 +23,7 @@ module.exports = function(grunt)
         },
 
         htmlmin: {
-            dist: {
+            default: {
                 files: {
                     'public/index.html': ['src/templates/index.jade']
                 }
@@ -54,7 +35,7 @@ module.exports = function(grunt)
                 compress: false
             },
 
-            compile: {
+            default: {
                 files: {
                     'public/styles.css': ['src/stylesheets/*.styl']
                 }
@@ -68,9 +49,28 @@ module.exports = function(grunt)
         },
 
         cssmin: {
-            dist: {
+            default: {
                 files: {
                     'public/styles.css': ['public/styles.css']
+                }
+            }
+        },
+
+        jshint: {
+            default: ['src/scripts/*.js']
+        },
+
+        concat: {
+            default: {
+                src: ['bower_components/jquery/jquery.min.js', 'src/scripts/*.js'],
+                dest: 'public/scripts.js'
+            }
+        },
+
+        uglify: {
+            default: {
+                files: {
+                    'public/scripts.js': ['public/scripts.js']
                 }
             }
         },
@@ -114,27 +114,18 @@ module.exports = function(grunt)
 
 
 
-    // Plugins baby
+    // Tasks
 
     require('load-grunt-tasks')(grunt);
 
+    grunt.registerTask('templates', ['jade']);
+    grunt.registerTask('stylesheets', ['stylus', 'autoprefixer']);
+    grunt.registerTask('scripts', ['jshint', 'concat']);
 
+    grunt.registerTask('common', ['clean', 'copy', 'templates', 'stylesheets', 'scripts']);
+    grunt.registerTask('workflow', ['connect', 'watch']);
+    grunt.registerTask('minify', ['htmlmin', 'cssmin', 'uglify']);
 
-    // Common tasks
-
-    grunt.registerTask('common', ['clean', 'copy:images']);
-
-    // Default tasks
-
-    grunt.registerTask('scripts', ['jshint:dist', 'concat:scripts']);
-    grunt.registerTask('stylesheets', ['stylus:compile', 'autoprefixer']);
-    grunt.registerTask('templates', ['jade:compile']);
-    grunt.registerTask('default', ['common', 'scripts', 'stylesheets', 'templates', 'connect', 'watch']);
-
-    // Production tasks
-
-    grunt.registerTask('scripts:dist', ['scripts', 'uglify:dist']);
-    grunt.registerTask('stylesheets:dist', ['stylesheets', 'cssmin:dist']);
-    grunt.registerTask('templates:dist', ['templates', 'htmlmin:dist']);
-    grunt.registerTask('dist', ['common', 'scripts:dist', 'stylesheets:dist', 'templates:dist']);
+    grunt.registerTask('default', ['common', 'workflow']);
+    grunt.registerTask('dist', ['common', 'minify']);
 };
