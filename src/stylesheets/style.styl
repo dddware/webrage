@@ -37,15 +37,16 @@ h1
   margin 0 auto
   max-width 1000px
   padding-bottom 5em
-
+.socials
+  text-align center
 .goto
 .logo
   display inline-block
   vertical-align top
-  //min-height 32em
 
 .logo
   width 62.5%
+  position relative
   background #fff
   border 1px solid darken(backgroundColor, 3)
   border-bottom 5px solid darken(backgroundColor, 3)
@@ -53,6 +54,7 @@ h1
   position relative
   cursor pointer
   width 18.75%
+  min-height 30em
   font-family 'Impact', sans-serif
   color red
   &:active
@@ -74,16 +76,26 @@ h1
   &.right:hover:after
     left: 43%
 
-.logo
-  width 500px
-  position relative
-
 .cube
   float left
   width 10%
   background url('images/angular.png') center center
+  transition all 0.2s
   &:before
     content ''
     display block
     height 0
     padding-bottom 100%
+  &.hidden
+    animation falling 5s
+    visibility hidden
+
+@keyframes falling
+  0% 
+    opacity 0.9
+    margin-bottom 0
+  10%    
+    margin-bottom 5px
+  100% 
+    opacity 0
+    margin-top 100%

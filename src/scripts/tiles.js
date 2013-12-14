@@ -8,7 +8,7 @@
                 $el.css('background-position', '-' + coords.left + 'px -' + coords.top + 'px');
         });
     };
-
+    
     offsetBackgrounds('.cube');
 })
 (jQuery);
