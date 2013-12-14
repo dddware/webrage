@@ -32,13 +32,14 @@ h1
 .main
   position relative
   margin 0 auto
-  max-width: 1000px
+  max-width 1000px
+  padding-bottom 5em
 
 .goto
 .logo
   display inline-block
   vertical-align top
-  min-height 32em
+  //min-height 32em
 
 .logo
   width 62.5%
@@ -68,3 +69,17 @@ h1
     left: 37%
   &.right:hover:after
     left: 43%
+
+.logo
+  width 500px
+  position relative
+
+.cube
+  float left
+  width 10%
+  background url('images/angular.png') center center
+  &:before
+    content ''
+    display block
+    height 0
+    padding-bottom 100%

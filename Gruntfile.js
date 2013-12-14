@@ -15,8 +15,14 @@ module.exports = function(grunt)
         },
 
         jshint: {
-            beforedist: ['src/scripts/*.js'],
-            dist: ['public/scripts.js']
+            dist: ['src/scripts/*.js']
+        },
+
+        concat: {
+            scripts: {
+                src: ['bower_components/jquery/jquery.min.js', 'src/scripts/*.js'],
+                dest: 'public/scripts.js'
+            }
         },
 
         uglify: {
@@ -86,7 +92,7 @@ module.exports = function(grunt)
                 tasks: ['scripts'],
             },
 
-            scripts: {
+            stylesheets: {
                 files: ['src/stylesheets/*.styl'],
                 tasks: ['stylesheets']
             },
@@ -120,14 +126,14 @@ module.exports = function(grunt)
 
     // Default tasks
 
-    grunt.registerTask('scripts', ['jshint:beforedist']);
+    grunt.registerTask('scripts', ['jshint:dist', 'concat:scripts']);
     grunt.registerTask('stylesheets', ['stylus:compile', 'autoprefixer']);
     grunt.registerTask('templates', ['jade:compile']);
     grunt.registerTask('default', ['common', 'scripts', 'stylesheets', 'templates', 'connect', 'watch']);
 
     // Production tasks
 
-    grunt.registerTask('scripts:dist', ['scripts', 'uglify:dist', 'jshint:dist']);
+    grunt.registerTask('scripts:dist', ['scripts', 'uglify:dist']);
     grunt.registerTask('stylesheets:dist', ['stylesheets', 'cssmin:dist']);
     grunt.registerTask('templates:dist', ['templates', 'htmlmin:dist']);
     grunt.registerTask('dist', ['common', 'scripts:dist', 'stylesheets:dist', 'templates:dist']);
