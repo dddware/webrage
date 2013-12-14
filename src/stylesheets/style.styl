@@ -76,16 +76,12 @@ h1
   &.right:hover:after
     left: 43%
 
-<<<<<<< HEAD
 .logo
   position relative
-
-=======
->>>>>>> 02749c228ae7f32f6efeafe94ec7c468303a42fb
 .cube
   float left
   width 10%
-  background url('images/angular.png') center center
+  background-position center center
   transition all 0.2s
   &:before
     content ''
@@ -94,10 +90,10 @@ h1
     padding-bottom 100%
   &.hidden
     animation falling 5s
-    visibility hidden
 
 @keyframes falling
   0% 
+    z-index 1
     opacity 0.9
     margin-bottom 0
   10%    
