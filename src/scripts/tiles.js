@@ -12,8 +12,8 @@
                 },
                 ie: {
                     src: 'images/ie.svg',
-                    width: 223,
-                    height: 219
+                    width: 400,
+                    height: 400 
                 }
             }
         };
