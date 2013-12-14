@@ -40,8 +40,12 @@
         }
 
         var $cubes = $('.cube');
-        positionAndPaint($cubes.css('background-image', data.src));
-        $cubes.css('position', 'absolute');
+        positionAndPaint($cubes);
+
+        $cubes.css({
+            position, 'absolute',
+            'background-image': data.src
+        });
     };
 
     initLogo('angular');
