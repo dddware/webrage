@@ -81,7 +81,7 @@ h1
 .cube
   float left
   width 10%
-  background url('images/angular.png') center center
+  background-position center center
   transition all 0.2s
   &:before
     content ''
@@ -90,10 +90,10 @@ h1
     padding-bottom 100%
   &.hidden
     animation falling 5s
-    visibility hidden
 
 @keyframes falling
   0% 
+    z-index 1
     opacity 0.9
     margin-bottom 0
   10%    
