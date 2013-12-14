@@ -1,6 +1,7 @@
 @import url('http://fonts.googleapis.com/css?family=Bangers')
 
 red = #F03A0C
+backgroundColor = #F0D10C
 
 logofont()
   font-family 'Bangers', 'Trebuchet MS', 'Impact', 'Helvetica', 'Arial', sans-serif
@@ -15,12 +16,14 @@ body
   margin 0
   padding 0
   color #333
+  background backgroundColor
 
 h1
   logofont()
   font-size 5em
   margin 0 0 0.2em
   text-align center
+  text-shadow 5px 5px 0 darken(backgroundColor, 5)
   .rage
     font-size 1.2em
     color red
@@ -42,8 +45,9 @@ h1
 
 .logo
   width 62.5%
-  background #f2f2f2
-  border 1px solid #e5e5e5
+  background #fff
+  border 1px solid darken(backgroundColor, 3)
+  border-bottom 5px solid darken(backgroundColor, 3)
 .goto
   position relative
   cursor pointer
