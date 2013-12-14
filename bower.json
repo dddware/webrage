@@ -1,0 +1,13 @@
+{
+  "name": "webrage",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dddware/webrage",
+  "authors": [
+    "@_neemzy <tom.panier@free.fr>",
+    "@victordarras <victor.darras@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.0.3"
+  }
+}
