@@ -43,8 +43,8 @@
         positionAndPaint($cubes);
 
         $cubes.css({
-            position, 'absolute',
-            'background-image': data.src
+            position: 'absolute',
+            'background-image': 'url(\'' + data.src + '\')'
         });
     };
 
