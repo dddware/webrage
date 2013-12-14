@@ -4,11 +4,12 @@
         $(els).each(function() {
             var $el = $(this),
                 coords = $el.position();
-
-                $el.css('background-position', '-' + coords.left + 'px -' + coords.top + 'px');
+            $el.css(
+                'background-position', '-' + coords.left + 'px -' + coords.top + 'px'
+                );
         });
     };
-    
+
     offsetBackgrounds('.cube');
 })
 (jQuery);
