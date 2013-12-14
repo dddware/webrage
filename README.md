@@ -18,9 +18,9 @@ bower install
 
 ## Deployment
 
-`grunt dist` builds the production-ready site (with minified assets and shit).
+`grunt dist` builds the production-ready site (with minified assets and shit). Make sure to run it before you commit changes so only production assets are kept on the repository.
 
 ## TODO
 
-- add prefixr to Gruntfile
-- actually separate minification tasks to run them on dist only
+- no jquery
+- refactor && write tests for js code
