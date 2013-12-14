@@ -9,6 +9,11 @@
                     src: 'images/angular.png',
                     width: 500,
                     height: 500
+                },
+                ie: {
+                    src: 'images/ie.svg',
+                    width: 223,
+                    height: 219
                 }
             }
         };
@@ -31,6 +36,7 @@
         var data = config.logos[name];
 
         $logo.empty().width(data.width);
+        $logo.empty().height(data.height);
 
         // How many cubes do we need to fill this up ?
         var nbCubes = (data.height / (data.width / config.cubes)) * config.cubes;
@@ -48,6 +54,6 @@
         });
     };
 
-    initLogo('angular');
+    initLogo('ie');
 })
 (jQuery);

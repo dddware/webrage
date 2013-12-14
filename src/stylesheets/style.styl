@@ -21,7 +21,7 @@ body
 h1
   logofont()
   font-size 5em
-  margin 0 0 0.2em
+  margin 0 0 0.5em
   text-align center
   text-shadow 5px 5px 0 darken(backgroundColor, 5)
   .rage
@@ -37,6 +37,7 @@ h1
   margin 0 auto
   max-width 1000px
   padding-bottom 5em
+  text-align center
 .socials
   text-align center
 .goto
@@ -47,7 +48,7 @@ h1
 .logo
   width 62.5%
   position relative
-  background #fff
+  background radial-gradient(rgba(255,255,255,1),rgba(255,255,255,0.5)) 
   border 1px solid darken(backgroundColor, 3)
   border-bottom 5px solid darken(backgroundColor, 3)
 .goto
@@ -90,10 +91,13 @@ h1
     height 0
     padding-bottom 100%
   &.hidden
-    animation falling 5s
+    animation falling 3s 
+    animation-fill-mode: forwards;
 
 @keyframes falling
-  0% 
+  0%
+    opacity 0
+  1% 
     z-index 1
     opacity 0.9
     margin-bottom 0
