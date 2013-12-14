@@ -1,14 +1,49 @@
 (function($)
 {
-    var offsetBackgrounds = function(els) {
-        $(els).each(function() {
+    var $logo = $('.logo'),
+        config = {
+            cubes: 10, // cubes per row
+
+            logos: {
+                angular: {
+                    src: 'images/angular.png',
+                    width: 500,
+                    height: 500
+                }
+            }
+        };
+
+    var positionAndPaint = function($els) {
+        $els.each(function() {
             var $el = $(this),
                 coords = $el.position();
 
-                $el.css('background-position', '-' + coords.left + 'px -' + coords.top + 'px');
+            // Set CSS coordinates (for absolute positioning) and matching background-position
+            $el.css({
+                top: coords.top,
+                left: coords.left,
+                'background-position': '-' + coords.left + 'px -' + coords.top + 'px'
+            });
         });
     };
 
-    offsetBackgrounds('.cube');
+    var initLogo = function(name) {
+        var data = config.logos[name];
+
+        $logo.empty().width(data.width);
+
+        // How many cubes do we need to fill this up ?
+        var nbCubes = (data.height / (data.width / config.cubes)) * config.cubes;
+
+        for (var i = 0; i < nbCubes; i++) {
+            $logo.append('<div class="cube" />');
+        }
+
+        var $cubes = $('.cube');
+        positionAndPaint($cubes.css('background-image', data.src));
+        $cubes.css('position', 'absolute');
+    };
+
+    initLogo('angular');
 })
 (jQuery);
