@@ -25,7 +25,7 @@ module.exports = function(grunt)
         htmlmin: {
             default: {
                 files: {
-                    'public/index.html': ['src/templates/index.jade']
+                    'public/index.html': ['public/index.html']
                 }
             }
         },
